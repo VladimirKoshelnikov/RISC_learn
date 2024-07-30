@@ -1,7 +1,7 @@
-SOURCES+=$$PWD/src/pc.sv
-SOURCES+=$$PWD/testbench/pc_tb.sv
+SOURCES+=$$PWD/src/rf.sv
+SOURCES+=$$PWD/testbench/rf_tb.sv
 
-SOURCE_TOP+=pc_tb 
+SOURCE_TOP+=rf_tb 
 
 run: compile simulation
 

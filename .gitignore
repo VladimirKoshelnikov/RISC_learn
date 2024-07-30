@@ -1,3 +1,4 @@
 work/*
 transcript
-rf*
+src/program.hex
+src/rom.sv
