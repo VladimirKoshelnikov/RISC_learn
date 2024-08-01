@@ -1,4 +1,4 @@
 work/*
 transcript
-src/program.hex
-src/rom.sv
+src/id.sv
+src/mux*
