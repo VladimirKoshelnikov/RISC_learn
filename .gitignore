@@ -1,4 +1,3 @@
 work/*
 transcript
 src/id.sv
-testbench/mux*
