@@ -7,7 +7,7 @@ module alu #(
     input bit [DATA_WIDTH - 1:0] rs1_data,
     input bit [DATA_WIDTH - 1:0] rs2_data,
 
-    input bit [DATA_WIDTH - 1:0] rd_data 
+    output bit [DATA_WIDTH - 1:0] rd_data 
 );
     `define ALU_ADD  10'b0000000000
     `define ALU_SUB  10'b0100000000
@@ -43,10 +43,10 @@ module alu #(
     function bit [DATA_WIDTH - 1:0] slt_calc (  input bit [DATA_WIDTH - 1:0] rs1_data,
                                                 input bit [DATA_WIDTH - 1:0] rs2_data) ;
         case ({rs1_data[DATA_WIDTH - 1], rs2_data[DATA_WIDTH - 1]})
-            `ALU_BOTH_POSITIVE:      return rs1_data[DATA_WIDTH - 2:0] > rs2_data[DATA_WIDTH - 2:0] ? 1 : 0;
+            `ALU_BOTH_POSITIVE:      return rs1_data[DATA_WIDTH - 2:0] < rs2_data[DATA_WIDTH - 2:0] ? 1 : 0;
             `ALU_RS1_POS_RS2_NEG:    return 0;
             `ALU_RS1_NEG_RS2_POS:    return 1;
-            `ALU_BOTH_NEGATIVE:      return rs1_data[DATA_WIDTH - 2:0] < rs2_data[DATA_WIDTH - 2:0] ? 1 : 0;
+            `ALU_BOTH_NEGATIVE:      return rs1_data[DATA_WIDTH - 2:0] > rs2_data[DATA_WIDTH - 2:0] ? 1 : 0;
         endcase
     endfunction
 

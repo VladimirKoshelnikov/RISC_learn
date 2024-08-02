@@ -1,7 +1,7 @@
-SOURCES+=$$PWD/src/rf.sv
-SOURCES+=$$PWD/testbench/rf_tb.sv
+SOURCES+=$$PWD/src/alu.sv
+SOURCES+=$$PWD/testbench/alu_tb.sv
 
-SOURCE_TOP+=rf_tb 
+SOURCE_TOP+=alu_tb 
 
 run: compile simulation
 
