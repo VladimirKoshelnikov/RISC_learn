@@ -8,9 +8,9 @@
  *                        Aleksandr Romanov 
  */ 
 
-module sm_rom
+module rom
 #(
-    parameter SIZE = 64
+    parameter ROM_SIZE = 64
 )
 (
     input  [31:0] a,

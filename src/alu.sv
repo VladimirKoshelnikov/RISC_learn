@@ -1,5 +1,5 @@
 module alu #(
-    DATA_WIDTH = 32
+    parameter DATA_WIDTH = 32
 ) (
     input bit [2:0] func3,
     input bit [6:0] func7,

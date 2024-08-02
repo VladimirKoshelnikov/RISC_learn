@@ -2,13 +2,13 @@ module id_tb();
     parameter INSTRUCTON_WIDTH = 32;
     
     bit [INSTRUCTON_WIDTH -1 : 0] input_instruction;
-    bit [6 : 0]     out_opcode;
-    bit [4 : 0]     out_rd;
-    bit [4 : 0]     out_rs1;
-    bit [4 : 0]     out_rs2;
-    bit [2 : 0]     out_funct3;
-    bit [31 : 0]    out_imm;
-    bit [6 : 0]     out_funct7;
+    bit [6 : 0]      opcode;
+    bit [4 : 0]      rd;
+    bit [4 : 0]      rs1;
+    bit [4 : 0]      rs2;
+    bit [2 : 0]      funct3;
+    bit [31 : 0]     imm;
+    bit [6 : 0]      funct7;
 
     id dut(.*);
     
@@ -42,7 +42,7 @@ module id_tb();
     initial begin
         forever begin
             @(posedge clk);
-            $display("time: %0t; input_instruction: %32b op_type: %6s; out_rd: %5b; out_rs1: %5b; out_rs2: %5b; out_funct3: %3b  out_imm: %32b  out_funct7: %7b", $time, input_instruction, op_type_decoder[out_opcode], out_rd, out_rs1, out_rs2, out_funct3, out_imm,out_funct7);
+            $display("time: %0t; input_instruction: %32b op_type: %6s;  rd: %5b;  rs1: %5b;  rs2: %5b;  funct3: %3b   imm: %32b   funct7: %7b", $time, input_instruction, op_type_decoder[ opcode],  rd,  rs1,  rs2,  funct3,  imm, funct7);
             std::randomize (input_instruction) with { 
                 input_instruction[6:0] == 7'b0110011 |
                 input_instruction[6:0] == 7'b0010011 |
