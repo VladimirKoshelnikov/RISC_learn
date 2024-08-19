@@ -8,16 +8,18 @@ module id #(
     output  bit [4 : 0]     rd,
     output  bit [4 : 0]     rs1,
     output  bit [4 : 0]     rs2,
-    output  bit [2 : 0]     funct3,
+    output  bit [2 : 0]     func3,
     output  bit [31 : 0]    imm,
-    output  bit [6 : 0]     funct7,
+    output  bit [6 : 0]     func7,
 
-    output  bit             alu_reg_reg_op,
-    output  bit             alu_reg_con_op,
-    output  bit             alu_branch_op
+    output  bit R_type,
+    output  bit I_type,
+    output  bit S_type,
+    output  bit B_type,
+    output  bit U_type,
+    output  bit J_type
 
 );
-
 
     string op_type_decoder [bit [6:0]];
 
@@ -38,8 +40,7 @@ module id #(
     end
     
     assign  opcode   = input_instruction[6:0];
-    assign  alu_reg_reg_op = input_instruction[6:0] == 7'b0110011;
-    assign  alu_reg_con_op = input_instruction[6:0] == 7'b0010011;
+
     always_comb begin
         case (op_type_decoder[input_instruction[6:0]])
         // -----------------------------------------------------------       
@@ -48,16 +49,16 @@ module id #(
         // |                   input_instruction                     |
         // -----------------------------------------------------------
         // |31     :     25| 24:20 | 19:15 | 14 : 12 | 11:7 | 6 : 0  |
-        // |    funct7     |  rs2  |  rs1  | funct3  |  rd  | opcode |
+        // |    func7     |  rs2  |  rs1  | func3  |  rd  | opcode |
         // -----------------------------------------------------------
 
             "R-Type" : begin    
                   rd      = input_instruction[11 : 7];
-                  funct3  = input_instruction[14 : 12];
+                  func3  = input_instruction[14 : 12];
                   rs1     = input_instruction[19 : 15];
                   rs2     = input_instruction[24 : 20];
                   imm     = '0;
-                  funct7  = input_instruction[31 : 25];
+                  func7  = input_instruction[31 : 25];
             end
 
         // -----------------------------------------------------------
@@ -66,16 +67,16 @@ module id #(
         // |                   input_instruction                     |
         // -----------------------------------------------------------
         // |31         :        20 | 19:15 | 14 : 12 | 11:7 | 6 : 0  |
-        // |       imm[11:0]       |  rs1  | funct3  |  rd  | opcode |
+        // |       imm[11:0]       |  rs1  | func3  |  rd  | opcode |
         // -----------------------------------------------------------
         
             "I-Type" : begin    
                   rd      = input_instruction[11 : 7];
-                  funct3  = input_instruction[14 : 12];
+                  func3  = input_instruction[14 : 12];
                   rs1     = input_instruction[19 : 15];
                   rs2     = '0;
                   imm     = {20'b0, input_instruction[31 : 20]};
-                  funct7  = '0;
+                  func7  = '0;
             end
         // -----------------------------------------------------------------
         // S-Type
@@ -83,16 +84,16 @@ module id #(
         // |                      input_instruction                        |
         // -----------------------------------------------------------------
         // |31     :     25| 24:20 | 19:15 | 14 : 12 | 11:7       | 6 : 0  |
-        // |   imm[11:5]   |  rs2  |  rs1  | funct3  |  imm[4:0]  | opcode |
+        // |   imm[11:5]   |  rs2  |  rs1  | func3  |  imm[4:0]  | opcode |
         // -----------------------------------------------------------------
         
             "S-Type" : begin    
                   rd      = '0;
-                  funct3  = input_instruction[14 : 12];
+                  func3  = input_instruction[14 : 12];
                   rs1     = input_instruction[19 : 15];
                   rs2     = input_instruction[24 : 20];
                   imm     = {20'b0, input_instruction[31 : 25], input_instruction[11 : 7]};
-                  funct7  = '0;
+                  func7  = '0;
             end
         // --------------------------------------------------------------------
         // B-Type
@@ -100,12 +101,12 @@ module id #(
         // |                      input_instruction                           |
         // --------------------------------------------------------------------
         // |31     :     25| 24:20 | 19:15 | 14 : 12 |     11:7      | 6 : 0  |
-        // | imm[12|10:5]  |  rs2  |  rs1  | funct3  |  imm[4:1|11]  | opcode |
+        // | imm[12|10:5]  |  rs2  |  rs1  | func3   |  imm[4:1|11]  | opcode |
         // --------------------------------------------------------------------
             
             "B-Type" : begin    
                   rd      = '0;
-                  funct3  = input_instruction[14 : 12];
+                  func3   = input_instruction[14 : 12];
                   rs1     = input_instruction[19 : 15];
                   rs2     = input_instruction[24 : 20];
                   imm     = { 19'b0,
@@ -114,7 +115,7 @@ module id #(
                                 input_instruction[30 : 25], 
                                 input_instruction[11 : 8], 
                                 1'b0};
-                  funct7  = '0;
+                  func7  = '0;
             end
         // -------------------------------------------------------
         // U-Type
@@ -127,11 +128,11 @@ module id #(
         
             "U-Type" : begin    
                   rd      = input_instruction[11 : 7];
-                  funct3  = '0;
+                  func3  = '0;
                   rs1     = '0;
                   rs2     = '0;
                   imm     = {input_instruction[31 : 12], 12'b0};
-                  funct7  = '0;
+                  func7  = '0;
             end
         // -------------------------------------------------------
         // J-Type    
@@ -143,7 +144,7 @@ module id #(
         // -------------------------------------------------------
                 "J-Type" : begin    
                   rd      = input_instruction[11 : 7];
-                  funct3  = '0;
+                  func3  = '0;
                   rs1     = '0;
                   rs2     = '0;
                   imm     = { 10'b0,
@@ -152,9 +153,19 @@ module id #(
                                 input_instruction[20], 
                                 input_instruction[30 : 21], 
                                 1'b0};
-                  funct7  = '0;
+                  func7  = '0;
             end
         endcase
     end
+
+    always_comb begin
+
+            R_type = op_type_decoder[input_instruction[6:0]] == "R-type" ? 1'b1 : 1'b0; 
+            I_type = op_type_decoder[input_instruction[6:0]] == "I-type" ? 1'b1 : 1'b0; 
+            S_type = op_type_decoder[input_instruction[6:0]] == "S-type" ? 1'b1 : 1'b0; 
+            B_type = op_type_decoder[input_instruction[6:0]] == "B-type" ? 1'b1 : 1'b0; 
+            U_type = op_type_decoder[input_instruction[6:0]] == "U-type" ? 1'b1 : 1'b0; 
+            J_type = op_type_decoder[input_instruction[6:0]] == "J-type" ? 1'b1 : 1'b0;     
+        end
     
 endmodule
