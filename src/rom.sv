@@ -13,11 +13,11 @@ module rom
     parameter ROM_SIZE = 64
 )
 (
-    input  [31:0] a,
-    output [31:0] rd
+    input  [31:0] cmd_address_current,
+    output [31:0] current_instruction
 );
-    reg [31:0] rom [SIZE - 1:0];
-    assign rd = rom [a];
+    reg [31:0] rom [ROM_SIZE - 1:0];
+    assign current_instruction = rom [cmd_address_current];
 
     initial begin
         $readmemh ("program.hex", rom);
