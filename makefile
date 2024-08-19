@@ -1,8 +1,8 @@
 
-SOURCES+=$$PWD/src/id.sv 
-SOURCES+=$$PWD/testbench/id_tb.sv 
+SOURCES+=$$PWD/src/alu.sv 
+SOURCES+=$$PWD/testbench/alu_tb.sv 
 
-SOURCE_TOP+=id_tb 
+SOURCE_TOP+=alu_tb 
 
 run: syntesis elaborate simulation
 
