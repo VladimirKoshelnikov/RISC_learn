@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram name="Страница — 1" id="DPWCWUmwUdzIHu66x9n9">
-        <mxGraphModel dx="819" dy="903" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+        <mxGraphModel dx="998" dy="1175" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" background="#FFFFFF" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -20,7 +20,7 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="11" value="WE_ALU" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="4SYehKu4-7LgS69gVi2z-56">
+                <mxCell id="11" value="WE_ALU" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="4SYehKu4-7LgS69gVi2z-56" vertex="1" connectable="0">
                     <mxGeometry x="-0.8329" y="-1" relative="1" as="geometry">
                         <mxPoint x="1" y="-38" as="offset"/>
                     </mxGeometry>
@@ -43,7 +43,7 @@
                 <mxCell id="4SYehKu4-7LgS69gVi2z-4" value="ID" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="560" y="160" width="80" height="160" as="geometry"/>
                 </mxCell>
-                <mxCell id="4SYehKu4-7LgS69gVi2z-5" value="" style="group" parent="1" vertex="1" connectable="0">
+                <mxCell id="4SYehKu4-7LgS69gVi2z-5" value="" style="group;" parent="1" vertex="1" connectable="0">
                     <mxGeometry x="200" y="200" width="70" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="4SYehKu4-7LgS69gVi2z-1" value="PC" style="rounded=0;whiteSpace=wrap;html=1;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="4SYehKu4-7LgS69gVi2z-5" vertex="1">
@@ -234,13 +234,13 @@
                 <mxCell id="6" value="" style="triangle;whiteSpace=wrap;html=1;rotation=-90;" parent="1" vertex="1">
                     <mxGeometry x="1090" y="240" width="20" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="12" value="Next adress" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];rotation=0;" vertex="1" connectable="0" parent="1">
+                <mxCell id="12" value="Next adress" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];rotation=0;" parent="1" vertex="1" connectable="0">
                     <mxGeometry x="160" y="248" as="geometry"/>
                 </mxCell>
-                <mxCell id="14" value="ALU" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                <mxCell id="14" value="ALU" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="1075" y="190" width="50" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="15" value="" style="endArrow=classic;html=1;rounded=0;entryX=-0.006;entryY=0.599;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="4SYehKu4-7LgS69gVi2z-34">
+                <mxCell id="15" value="" style="endArrow=classic;html=1;rounded=0;entryX=-0.006;entryY=0.599;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" target="4SYehKu4-7LgS69gVi2z-34" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="310" y="240" as="sourcePoint"/>
                         <mxPoint x="900" y="110" as="targetPoint"/>
@@ -251,7 +251,7 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="16" value="PC_address" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="15">
+                <mxCell id="16" value="PC_address" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="15" vertex="1" connectable="0">
                     <mxGeometry x="0.0863" y="-1" relative="1" as="geometry">
                         <mxPoint y="-11" as="offset"/>
                     </mxGeometry>
