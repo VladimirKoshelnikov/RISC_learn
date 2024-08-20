@@ -2,8 +2,6 @@ module alu #(
     parameter DATA_WIDTH = 32,
     parameter RAM_WIDTH = 31
 ) (
-    `include "rv32i_id.svh"
-
     input bit [2:0] func3,
     input bit [6:0] func7,
     input bit [6:0] opcode,
@@ -25,6 +23,7 @@ module alu #(
 
 );
 
+    `include "rv32i_id.svh"
 
     bit [DATA_WIDTH - 1:0] sltu_calc_data;
     bit [DATA_WIDTH - 1:0] _ram_data;

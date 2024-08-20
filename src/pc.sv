@@ -1,6 +1,6 @@
 module pc #(
     parameter COUNTER_WIDTH = 32,
-    parameter CMD_WIDTH = 32'h4,
+    parameter CMD_WIDTH     = 32'h4,
     parameter START_ADDRESS = 32'h0
 ) (
     input   bit clk,

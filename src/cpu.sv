@@ -1,4 +1,5 @@
-module cpu #( parameter CPU_WIDTH ) (   
+module cpu #(   parameter CPU_WIDTH = 32, 
+                parameter RAM_WIDTH = 31) (   
     input bit clk, 
     input bit a_reset_n);
     
@@ -8,19 +9,40 @@ module cpu #( parameter CPU_WIDTH ) (
     localparam COUNTER_WIDTH    = CPU_WIDTH;
     localparam DATA_WIDTH       = CPU_WIDTH;
     localparam INSTRUCTON_WIDTH = CPU_WIDTH;
-    
 
     localparam ROM_SIZE = 64;
     
     localparam REGISTER_ADDRESS_WIDTH = 5;
     localparam REGISTER_ADDRESS_DEPTH = 32;
 
+
+    bit [COUNTER_WIDTH -1 : 0] cmd_address_next;
+    bit [COUNTER_WIDTH -1 : 0] cmd_address_current;
+
+    bit [CPU_WIDTH - 1:0] current_instruction; 
+
+    bit [RAM_WIDTH - 1 :0]          ram_address;
+    bit                             ram_we;
+    wire [DATA_WIDTH - 1:0]         ram_data;
+
+
+    bit [6 : 0]     id_opcode;
+    bit [4 : 0]     id_rd;
+    bit [4 : 0]     id_rs1;
+    bit [4 : 0]     id_rs2;
+    bit [2 : 0]     id_func3;
+    bit [31 : 0]    id_imm;
+    bit [6 : 0]     id_func7;
+
+
+    bit[DATA_WIDTH - 1 : 0] rf_rd_data;
+    bit[DATA_WIDTH - 1 : 0] rf_rs1_data;
+    bit[DATA_WIDTH - 1 : 0] rf_rs2_data;
+    bit[DATA_WIDTH - 1 : 0] rf_we;
+
     // *************************************************************
     // Program counter declaring
     // *************************************************************
-    
-    bit [COUNTER_WIDTH -1 : 0] cmd_address_next;
-    bit [COUNTER_WIDTH -1 : 0] cmd_address_current;
     
     pc #(.COUNTER_WIDTH(COUNTER_WIDTH), 
          .CMD_WIDTH(CMD_WIDTH),
@@ -35,8 +57,6 @@ module cpu #( parameter CPU_WIDTH ) (
     // ROM declaring
     // *************************************************************
 
-    bit [31:0] current_instruction; 
-
     rom rom(
         .cmd_address_current(cmd_address_current),
         .current_instruction(current_instruction));
@@ -45,48 +65,23 @@ module cpu #( parameter CPU_WIDTH ) (
     // Instruction decoder declaring
     // *************************************************************
 
-    bit [6 : 0]     opcode;
-    bit [4 : 0]     rd;
-    bit [4 : 0]     rs1;
-    bit [4 : 0]     rs2;
-    bit [2 : 0]     func3;
-    bit [31 : 0]    imm;
-    bit [6 : 0]     func7;
-
-    bit R_type;
-    bit I_type;
-    bit S_type;
-    bit B_type;
-    bit U_type;
-    bit J_type;
-
-    bit 
-
     id #( .INSTRUCTON_WIDTH(INSTRUCTON_WIDTH)
         ) instruction_decoder(
             .input_instruction(current_instruction),
 
-            .opcode(opcode),
-            .rd(rd),
-            .rs1(rs1),
-            .rs2(rs2),
-            .func3(func3),
-            .imm(imm),
-            .func7(func7)
-            .R_type(R_type)
-            .I_type(I_type)
-            .S_type(S_type)
-            .B_type(B_type)
-            .U_type(U_type)
-            .J_type(J_type)
+            .opcode(id_opcode),
+            .rd(id_rd),
+            .rs1(id_rs1),
+            .rs2(id_rs2),
+            .func3(id_func3),
+            .imm(id_imm),
+            .func7(id_func7)
             );
 
         
     // *************************************************************
     // Register File declaring
     // *************************************************************
-
-    bit[DATA_WIDTH - 1 : 0] alu_rd_data;
 
     rf #(
         .REGISTER_ADDRESS_WIDTH(REGISTER_ADDRESS_WIDTH),
@@ -97,30 +92,26 @@ module cpu #( parameter CPU_WIDTH ) (
         .clk(clk),
         .a_reset_n(a_reset_n),
 
-        .we(alu_reg_file_op),
-        .address1(rs1),
-        .address2(rs2),
-        .address3(rd),
-        .read_data_1(read_data_1),
-        .read_data_2(read_data_2),
+        .we(rf_we),
+        .address1(id_rs1),
+        .address2(id_rs2),
+        .address3(id_rd),
+        .read_data_1(rf_rs1_data),
+        .read_data_2(rf_rs2_data),
 
-        .write_data(alu_rd_data)
+        .write_data(rf_rd_data)
     );
 
     // *************************************************************
     // RAM declaring
     // *************************************************************
 
-    bit [RAM_BLOCK_DEPTH - 1 :0] ram_address;
-    bit ram_we;
-    logic [DATA_WIDTH - 1:0] ram_data
-
     ram #(
-        .RAM_BLOCK_DEPTH(17),
+        .RAM_WIDTH(RAM_WIDTH),
         .DATA_WIDTH(DATA_WIDTH)
     ) ram (
-        .clk(clk)
-        .ram_address(ram_address),
+        .clk(clk),
+        .address(ram_address),
         .we(ram_we),
         .data(ram_data)
     );
@@ -128,28 +119,29 @@ module cpu #( parameter CPU_WIDTH ) (
     // *************************************************************
     // ALU declaring
     // *************************************************************
-
-    bit[DATA_WIDTH - 1 : 0] alu_rs2_data;
-    bit alu_logic_data;
-
-    mux_bus_2_1 #(.BUS_WIDTH(DATA_WIDTH)) mux_bus_data_32b_2_1 (
-        .in_a(read_data_2),
-        .in_b(imm),
-        .s(I_type),
-        .out(alu_rs2_data)
-    );
     
     alu #(
+        .RAM_WIDTH(RAM_WIDTH),
         .DATA_WIDTH(DATA_WIDTH)
         ) alu (
-        .func3(func3),
-        .func7(func7),
-        .opcode(opcode),
-        .rs1_data(read_data_1),
-        .rs2_data(alu_rs2_data),
-        .rd_data(alu_rd_data),
-        .branch_logic_data(branch_logic_data)
-        );
+        .clk(clk),
 
+        .func3(id_func3),
+        .func7(id_func7),
+        .opcode(id_opcode),
+        .imm(id_imm),
+
+        .rs1_data(rf_rs1_data),
+        .rs2_data(rf_rs2_data),
+        .rd_data(rf_rd_data),
+        .rf_we(rf_we),
+
+        .ram_data(ram_we),
+        .ram_address(ram_address),
+        .ram_we(ram_data),
+
+        .pc_current_address(cmd_address_current),
+        .pc_next_address(cmd_address_next)
+        );
 
 endmodule

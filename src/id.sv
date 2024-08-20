@@ -10,14 +10,7 @@ module id #(
     output  bit [4 : 0]     rs2,
     output  bit [2 : 0]     func3,
     output  bit [31 : 0]    imm,
-    output  bit [6 : 0]     func7,
-
-    output  bit R_type,
-    output  bit I_type,
-    output  bit S_type,
-    output  bit B_type,
-    output  bit U_type,
-    output  bit J_type
+    output  bit [6 : 0]     func7
 
 );
 
@@ -157,15 +150,5 @@ module id #(
             end
         endcase
     end
-
-    always_comb begin
-
-            R_type = op_type_decoder[input_instruction[6:0]] == "R-type" ? 1'b1 : 1'b0; 
-            I_type = op_type_decoder[input_instruction[6:0]] == "I-type" ? 1'b1 : 1'b0; 
-            S_type = op_type_decoder[input_instruction[6:0]] == "S-type" ? 1'b1 : 1'b0; 
-            B_type = op_type_decoder[input_instruction[6:0]] == "B-type" ? 1'b1 : 1'b0; 
-            U_type = op_type_decoder[input_instruction[6:0]] == "U-type" ? 1'b1 : 1'b0; 
-            J_type = op_type_decoder[input_instruction[6:0]] == "J-type" ? 1'b1 : 1'b0;     
-        end
     
 endmodule
