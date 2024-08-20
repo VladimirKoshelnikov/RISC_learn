@@ -1,5 +1,13 @@
 
+SOURCES+=$$PWD/src/ram.sv 
 SOURCES+=$$PWD/src/alu.sv 
+#SOURCES+=$$PWD/src/cpu.sv 
+#SOURCES+=$$PWD/src/id.sv 
+#SOURCES+=$$PWD/src/mux_bus_2_1.sv 
+#SOURCES+=$$PWD/src/pc.sv 
+#SOURCES+=$$PWD/src/rf.sv 
+#SOURCES+=$$PWD/src/rom.sv
+
 SOURCES+=$$PWD/testbench/alu_tb.sv 
 
 SOURCE_TOP+=alu_tb 

@@ -6,9 +6,9 @@ module id_tb();
     bit [4 : 0]      rd;
     bit [4 : 0]      rs1;
     bit [4 : 0]      rs2;
-    bit [2 : 0]      funct3;
+    bit [2 : 0]      func3;
     bit [31 : 0]     imm;
-    bit [6 : 0]      funct7;
+    bit [6 : 0]      func7;
 
     id dut(.*);
     
@@ -42,7 +42,7 @@ module id_tb();
     initial begin
         forever begin
             @(posedge clk);
-            $display("time: %0t; input_instruction: %32b op_type: %6s;  rd: %5b;  rs1: %5b;  rs2: %5b;  funct3: %3b   imm: %32b   funct7: %7b", $time, input_instruction, op_type_decoder[ opcode],  rd,  rs1,  rs2,  funct3,  imm, funct7);
+            $display("time: %0t; input_instruction: %32b op_type: %6s;  rd: %5b;  rs1: %5b;  rs2: %5b;  func3: %3b   imm: %32b   func7: %7b", $time, input_instruction, op_type_decoder[ opcode],  rd,  rs1,  rs2,  func3,  imm, func7);
             std::randomize (input_instruction) with { 
                 input_instruction[6:0] == 7'b0110011 |
                 input_instruction[6:0] == 7'b0010011 |
