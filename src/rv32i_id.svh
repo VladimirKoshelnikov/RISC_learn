@@ -1,6 +1,6 @@
     // Opcodes operation
-    `define REG_TO_REG_OP   7'b0010011
-    `define REG_TO_IMM_OP   7'b0110011
+    `define REG_TO_REG_OP   7'b0110011
+    `define REG_TO_IMM_OP   7'b0010011
     `define BRANCH_OP       7'b1100011
     `define LOAD_OP         7'b0000011
     `define STORE_OP        7'b0100011
