@@ -1,13 +1,15 @@
 module cpu_tb();
     parameter CPU_WIDTH = 32;
     parameter RAM_WIDTH = 31;  
+    parameter FW_LENGTH = 31;  
     
     bit clk;
     bit a_reset_n;
 
     cpu #(
         .CPU_WIDTH(CPU_WIDTH),
-        .RAM_WIDTH(RAM_WIDTH)
+        .RAM_WIDTH(RAM_WIDTH),
+        .FW_LENGTH(FW_LENGTH)
     ) 
     RISC_V_CPU
     (   

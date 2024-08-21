@@ -58,7 +58,7 @@ module cpu #(   parameter CPU_WIDTH = 32,
     // ROM declaring
     // *************************************************************
 
-    rom rom(
+    rom #(.FW_LENGTH(FW_LENGTH)) rom(
         .cmd_address_current(cmd_address_current),
         .current_instruction(current_instruction));
         

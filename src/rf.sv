@@ -20,13 +20,16 @@ module rf #(
 
     bit [REGISTER_ADDRESS_DEPTH - 1 : 0] [DATA_WIDTH - 1: 0] RF_DATA ;   /*block ram*/
 
+    always_comb begin
+        read_data_1 <= RF_DATA[address1];
+        read_data_2 <= RF_DATA[address2];
+    end
+    
     always_ff @(posedge clk, negedge a_reset_n) begin
         if (~a_reset_n)  begin
             RF_DATA <= 'b0;
         end
         else begin
-            read_data_1 <= RF_DATA[address1];
-            read_data_2 <= RF_DATA[address2];
             if (we & address3 != 0 ) RF_DATA[address3] <= write_data;
         end 
     end
