@@ -68,7 +68,7 @@ module id #(
                   func3  = input_instruction[14 : 12];
                   rs1     = input_instruction[19 : 15];
                   rs2     = '0;
-                  imm     = {20'b0, input_instruction[31 : 20]};
+                  imm     = {{20{input_instruction[31]}}, input_instruction[31 : 20]};
                   func7  = '0;
             end
         // -----------------------------------------------------------------

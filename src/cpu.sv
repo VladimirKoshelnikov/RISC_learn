@@ -1,5 +1,6 @@
 module cpu #(   parameter CPU_WIDTH = 32, 
-                parameter RAM_WIDTH = 31) (   
+                parameter RAM_WIDTH = 31,
+                parameter FW_LENGTH = 8) (   
     input bit clk, 
     input bit a_reset_n);
     
@@ -122,7 +123,8 @@ module cpu #(   parameter CPU_WIDTH = 32,
     
     alu #(
         .RAM_WIDTH(RAM_WIDTH),
-        .DATA_WIDTH(DATA_WIDTH)
+        .DATA_WIDTH(DATA_WIDTH),
+        .FW_LENGTH(FW_LENGTH)
         ) alu (
         .clk(clk),
 
@@ -136,7 +138,7 @@ module cpu #(   parameter CPU_WIDTH = 32,
         .rd_data(rf_rd_data),
         .rf_we(rf_we),
 
-        .ram_data(ram_we),
+        .ram_data(ram_data),
         .ram_address(ram_address),
         .ram_we(ram_data),
 

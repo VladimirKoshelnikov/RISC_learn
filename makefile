@@ -7,9 +7,9 @@ SOURCES+=$$PWD/src/rf.sv
 SOURCES+=$$PWD/src/id.sv 
 SOURCES+=$$PWD/src/rom.sv
 
-#SOURCES+=$$PWD/testbench/alu_tb.sv 
+SOURCES+=$$PWD/testbench/cpu_tb.sv 
 
-#SOURCE_TOP+=alu_tb 
+SOURCE_TOP+=cpu_tb 
 
 run: syntesis elaborate simulation
 

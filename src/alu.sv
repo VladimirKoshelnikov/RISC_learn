@@ -1,6 +1,7 @@
 module alu #(
     parameter DATA_WIDTH = 32,
-    parameter RAM_WIDTH = 31
+    parameter RAM_WIDTH = 31,
+    parameter FW_LENGTH = 8
 ) (
     input bit [2:0] func3,
     input bit [6:0] func7,
@@ -22,12 +23,13 @@ module alu #(
     output bit [DATA_WIDTH - 1:0]   pc_next_address
 
 );
+    localparam FW_VOLUME = FW_LENGTH << 2;
 
     `include "rv32i_id.svh"
 
     bit [DATA_WIDTH - 1:0] sltu_calc_data;
     bit [DATA_WIDTH - 1:0] _ram_data;
-    
+
     assign sltu_calc_data = sltu_calc(rs1_data, rs2_data);
     
     assign ram_data = ram_we ? _ram_data : 32'bz;
@@ -48,7 +50,7 @@ module alu #(
         _ram_data           = 'b0;
         ram_we              = 1'b0;
         ram_address         = 'b0;
-        pc_next_address     = pc_current_address + 4;
+        pc_next_address     = (pc_current_address >= FW_VOLUME) ? 0 : pc_current_address + 4;
         rf_we               = 1'b1;
         case (opcode)
             `REG_TO_REG_OP : begin
@@ -90,7 +92,7 @@ module alu #(
                     `BLTU    :   if (sltu_calc_data[0])      pc_next_address = pc_current_address + imm;
                     `BGE     :   if (rs1_data >= rs2_data)   pc_next_address = pc_current_address + imm;
                     `BGEU    :   if (~sltu_calc_data[0])     pc_next_address = pc_current_address + imm;
-                    default  :   pc_next_address = pc_current_address + 4;
+                    default  :   pc_next_address = (pc_current_address >= FW_VOLUME) ? 0 : pc_current_address + 4;
                 endcase
             end
 
