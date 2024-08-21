@@ -2,6 +2,7 @@ module cpu_tb();
     parameter CPU_WIDTH = 32;
     parameter RAM_WIDTH = 31;  
     parameter FW_LENGTH = 31;  
+    parameter FW_PATH   = "src/firmware/ADDI.hex";
     
     bit clk;
     bit a_reset_n;
@@ -9,7 +10,8 @@ module cpu_tb();
     cpu #(
         .CPU_WIDTH(CPU_WIDTH),
         .RAM_WIDTH(RAM_WIDTH),
-        .FW_LENGTH(FW_LENGTH)
+        .FW_LENGTH(FW_LENGTH),
+        .FW_PATH(FW_PATH)
     ) 
     RISC_V_CPU
     (   
@@ -47,8 +49,10 @@ module cpu_tb();
     end
 
     initial begin
-        $dumpfile ("cpu.vcd");
+        $dumpfile ("result_vcd/ADDI.vcd");
         $dumpvars();
     end
     
+
+
 endmodule

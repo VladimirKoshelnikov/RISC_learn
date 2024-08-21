@@ -10,7 +10,8 @@
 
 module rom
 #(
-    parameter FW_LENGTH = 8
+    parameter FW_LENGTH = 8,
+    parameter FW_PATH   = "src/firmware/program.hex"
 )
 (
     input  [31:0] cmd_address_current,
@@ -20,7 +21,7 @@ module rom
     assign current_instruction = rom [cmd_address_current>>2];
 
     initial begin
-        $readmemh ("src/program.hex", rom);
+        $readmemh (FW_PATH, rom);
     end
 
 endmodule

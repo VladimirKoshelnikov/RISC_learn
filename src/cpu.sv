@@ -1,6 +1,7 @@
 module cpu #(   parameter CPU_WIDTH = 32, 
                 parameter RAM_WIDTH = 31,
-                parameter FW_LENGTH = 8) (   
+                parameter FW_LENGTH = 8,
+                parameter FW_PATH   = "src/firmware/program.hex") (   
     input bit clk, 
     input bit a_reset_n);
     
@@ -58,7 +59,10 @@ module cpu #(   parameter CPU_WIDTH = 32,
     // ROM declaring
     // *************************************************************
 
-    rom #(.FW_LENGTH(FW_LENGTH)) rom(
+    rom #(
+        .FW_LENGTH(FW_LENGTH),
+        .FW_PATH(FW_PATH)
+        ) rom(
         .cmd_address_current(cmd_address_current),
         .current_instruction(current_instruction));
         
