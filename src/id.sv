@@ -69,7 +69,7 @@ module id #(
                   rs1     = input_instruction[19 : 15];
                   rs2     = '0;
                   imm     = {{20{input_instruction[31]}}, input_instruction[31 : 20]};
-                  func7  = '0;
+                  func7  = (opcode == 7'b0010011 & (func3 == 3'h1 | func3 == 3'h5)) ? imm [11:5] : '0;
             end
         // -----------------------------------------------------------------
         // S-Type
