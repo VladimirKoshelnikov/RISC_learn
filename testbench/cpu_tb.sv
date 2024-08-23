@@ -1,8 +1,8 @@
 module cpu_tb();
     parameter CPU_WIDTH = 32;
     parameter RAM_WIDTH = 31;  
-    parameter FW_LENGTH = 18;  
-    parameter FW_PATH   = "src/firmware/hex/SRA.hex";
+    parameter FW_LENGTH = 12;  
+    parameter FW_PATH   = "src/firmware/hex/LOAD_STORE.hex";
     
     bit clk;
     bit a_reset_n;
@@ -49,7 +49,7 @@ module cpu_tb();
     end
 
     initial begin
-        $dumpfile ("result_vcd/SRA.vcd");
+        $dumpfile ("result_vcd/LOAD_STORE.vcd");
         $dumpvars();
     end
     

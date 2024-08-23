@@ -132,13 +132,13 @@ module alu #(
 
             `LUI_OP : begin  
                 case ({func7, func3})
-                    `LUI : rd_data = imm << 12;
+                    `LUI : rd_data = imm;
                 endcase
             end
 
             `AUIPC_OP  : begin                
                 case ({func7, func3})
-                    `AUIPC  : rd_data = pc_current_address + (imm << 12);
+                    `AUIPC  : rd_data = pc_current_address + imm;
                 endcase
             end
 

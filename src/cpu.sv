@@ -144,7 +144,7 @@ module cpu #(   parameter CPU_WIDTH = 32,
 
         .ram_data(ram_data),
         .ram_address(ram_address),
-        .ram_we(ram_data),
+        .ram_we(ram_we),
 
         .pc_current_address(cmd_address_current),
         .pc_next_address(cmd_address_next)
