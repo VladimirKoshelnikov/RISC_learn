@@ -75,9 +75,9 @@ module alu #(
                     `XOR     :   rd_data = rs1_data ^ imm;
                     `OR      :   rd_data = rs1_data | imm;
                     `AND     :   rd_data = rs1_data & imm;
-                    `SLL     :   rd_data = rs1_data << {imm[0], imm[1], imm[2], imm[3], imm[4]};
-                    `SRL     :   rd_data = rs1_data >> {imm[0], imm[1], imm[2], imm[3], imm[4]};
-                    `SRA     :   rd_data = {rs1_data[DATA_WIDTH - 1],   rs1_data[DATA_WIDTH - 2:0] >> {imm[0], imm[1], imm[2], imm[3], imm[4]}};
+                    `SLL     :   rd_data = rs1_data << imm;
+                    `SRL     :   rd_data = rs1_data >> imm;
+                    `SRA     :   rd_data = {rs1_data[DATA_WIDTH - 1],   rs1_data[DATA_WIDTH - 2:0] >> imm};
                     `SLT     :   rd_data = rs1_data < imm ? 1 : 0;
                     `SLTU    :   rd_data = sltu_calc_data;
                     default  :   rd_data = '0;  

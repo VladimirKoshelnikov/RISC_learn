@@ -69,19 +69,6 @@ module id #(
                   rs1     = input_instruction[19 : 15];
                   rs2     = '0;
                   imm     = {{20{input_instruction[31]}}, input_instruction[31 : 20]};
-                  if (
-                    {opcode, func3} == {7'b0010011, 3'b001} | 
-                    {opcode, func3} == {7'b0010011, 3'b101} )
-                    func7 =  {
-                        imm [5],
-                        imm [6],
-                        imm [7],
-                        imm [8],
-                        imm [9],
-                        imm [10],
-                        imm [11]
-                    };
-                    else 
                   func7  = '0;
             end
         // -----------------------------------------------------------------
