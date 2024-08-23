@@ -44,6 +44,18 @@ module alu #(
         endcase
     endfunction   
 
+
+    function bit [DATA_WIDTH - 1:0] sra_calc (  input bit [DATA_WIDTH - 1:0] rs1_data,
+                                                input bit [DATA_WIDTH - 1:0] rs2_data) ;
+        bit [DATA_WIDTH - 1:0] output_data;
+        output_data = rs1_data;
+        for (int i = rs2_data; i > 0; i = i -1 ) begin
+            output_data = output_data >> 1;
+            output_data[DATA_WIDTH - 1] = rs1_data[DATA_WIDTH - 1];
+        end
+        return output_data;
+    endfunction  
+
     always_comb begin
 
         rd_data             = '0;
@@ -62,7 +74,7 @@ module alu #(
                     `AND     :   rd_data = rs1_data & rs2_data;
                     `SLL     :   rd_data = rs1_data << rs2_data;
                     `SRL     :   rd_data = rs1_data >> rs2_data;
-                    `SRA     :   rd_data = {rs1_data[DATA_WIDTH - 1],   rs1_data[DATA_WIDTH - 2:0] >> rs2_data};
+                    `SRA     :   rd_data = sra_calc (rs1_data,rs2_data);
                     `SLT     :   rd_data = rs1_data < rs2_data ? 1 : 0;
                     `SLTU    :   rd_data = sltu_calc_data;
                     default  :   rd_data = '0;
@@ -77,7 +89,7 @@ module alu #(
                     `AND     :   rd_data = rs1_data & imm;
                     `SLL     :   rd_data = rs1_data << imm[4:0];
                     `SRL     :   rd_data = rs1_data >> imm[4:0];
-                    `SRA     :   rd_data = {rs1_data[DATA_WIDTH - 1],   rs1_data[DATA_WIDTH - 2:0] >> imm[4:0]};
+                    `SRA     :   rd_data = sra_calc (rs1_data, imm[4:0]);
                     `SLT     :   rd_data = rs1_data < imm ? 1 : 0;
                     `SLTU    :   rd_data = sltu_calc_data;
                     default  :   rd_data = '0;  
