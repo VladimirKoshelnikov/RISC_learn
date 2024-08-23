@@ -1,9 +1,9 @@
 module cpu_tb();
     parameter CPU_WIDTH = 32;
     parameter RAM_WIDTH = 31;  
-    parameter FW_LENGTH = 28;  
+    parameter FW_LENGTH = 19;  
     parameter COUNTER_WIDTH = 12;  
-    parameter FW_PATH   = "src/firmware/hex/BRANCHES.hex";
+    parameter FW_PATH   = "src/firmware/hex/JUMP.hex";
     
     bit clk;
     bit a_reset_n;
@@ -51,7 +51,7 @@ module cpu_tb();
     end
 
     initial begin
-        $dumpfile ("result_vcd/BRANCHES.vcd");
+        $dumpfile ("result_vcd/JUMP.vcd");
         $dumpvars();
     end
     

@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Wed Aug 21 10:55:19 2024
+[*] Fri Aug 23 15:28:56 2024
 [*]
-[dumpfile] "/home/vladimir/RISC_learn/result_vcd/ADDI.vcd"
-[dumpfile_mtime] "Wed Aug 21 10:22:37 2024"
-[dumpfile_size] 12384580
-[savefile] "/home/vladimir/RISC_learn/result_vcd/ADDI.gtkw"
+[dumpfile] "/home/vladimir/RISC_learn/result_vcd/JUMP.vcd"
+[dumpfile_mtime] "Fri Aug 23 15:28:15 2024"
+[dumpfile_size] 2331420
+[savefile] "/home/vladimir/RISC_learn/result_vcd/GTK-Wave_style.gtkw"
 [timestart] 0
-[size] 1000 980
-[pos] 36 -220
-*-13.000000 3350 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[size] 1920 1077
+[pos] -1 -1
+*-13.000000 900 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] cpu_tb.
 [treeopen] cpu_tb.RISC_V_CPU.
 [sst_width] 194
@@ -25,8 +25,8 @@ cpu_tb.a_reset_n
 -
 -Program counter
 @22
-cpu_tb.RISC_V_CPU.program_counter.cmd_address_current[31:0]
-cpu_tb.RISC_V_CPU.program_counter.cmd_address_next[31:0]
+cpu_tb.RISC_V_CPU.program_counter.cmd_address_current[11:0]
+cpu_tb.RISC_V_CPU.program_counter.cmd_address_next[11:0]
 @200
 -
 -Instruction decoder
@@ -70,51 +70,8 @@ cpu_tb.RISC_V_CPU.alu.imm[31:0]
 @200
 -
 @22
-cpu_tb.RISC_V_CPU.alu.pc_next_address[31:0]
-@c00022
-cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-@28
-(0)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(1)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(2)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(3)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(4)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(5)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(6)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(7)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(8)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(9)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(10)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(11)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(12)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(13)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(14)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(15)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(16)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(17)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(18)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(19)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(20)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(21)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(22)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(23)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(24)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(25)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(26)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(27)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(28)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(29)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(30)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-(31)cpu_tb.RISC_V_CPU.alu.pc_current_address[31:0]
-@1401200
--group_end
-@200
--
-@28
-cpu_tb.RISC_V_CPU.alu.rf_we
-@22
-cpu_tb.RISC_V_CPU.alu.rd_data[31:0]
-cpu_tb.RISC_V_CPU.alu.rs1_data[31:0]
-cpu_tb.RISC_V_CPU.alu.rs2_data[31:0]
+cpu_tb.RISC_V_CPU.alu.pc_current_address[11:0]
+@23
+cpu_tb.RISC_V_CPU.alu.pc_next_address[11:0]
 [pattern_trace] 1
 [pattern_trace] 0
