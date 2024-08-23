@@ -63,8 +63,8 @@ module alu #(
                     `SLL     :   rd_data = rs1_data << rs2_data;
                     `SRL     :   rd_data = rs1_data >> rs2_data;
                     `SRA     :   rd_data = {rs1_data[DATA_WIDTH - 1],   rs1_data[DATA_WIDTH - 2:0] >> rs2_data};
-                    `SLTU    :   rd_data = rs1_data < rs2_data ? 1 : 0;
-                    `SLT     :   rd_data = sltu_calc_data;
+                    `SLT     :   rd_data = rs1_data < rs2_data ? 1 : 0;
+                    `SLTU    :   rd_data = sltu_calc_data;
                     default  :   rd_data = '0;
                 endcase
             end
@@ -78,8 +78,8 @@ module alu #(
                     `SLL     :   rd_data = rs1_data << imm;
                     `SRL     :   rd_data = rs1_data >> imm;
                     `SRA     :   rd_data = {rs1_data[DATA_WIDTH - 1],   rs1_data[DATA_WIDTH - 2:0] >> imm};
-                    `SLTU    :   rd_data = rs1_data < imm ? 1 : 0;
-                    `SLT     :   rd_data = sltu_calc_data;
+                    `SLT     :   rd_data = rs1_data < imm ? 1 : 0;
+                    `SLTU    :   rd_data = sltu_calc_data;
                     default  :   rd_data = '0;  
                 endcase          
             end
