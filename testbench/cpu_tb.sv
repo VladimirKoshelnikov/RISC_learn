@@ -1,8 +1,9 @@
 module cpu_tb();
     parameter CPU_WIDTH = 32;
     parameter RAM_WIDTH = 31;  
-    parameter FW_LENGTH = 12;  
-    parameter FW_PATH   = "src/firmware/hex/LOAD_STORE.hex";
+    parameter FW_LENGTH = 28;  
+    parameter COUNTER_WIDTH = 12;  
+    parameter FW_PATH   = "src/firmware/hex/BRANCHES.hex";
     
     bit clk;
     bit a_reset_n;
@@ -11,7 +12,8 @@ module cpu_tb();
         .CPU_WIDTH(CPU_WIDTH),
         .RAM_WIDTH(RAM_WIDTH),
         .FW_LENGTH(FW_LENGTH),
-        .FW_PATH(FW_PATH)
+        .FW_PATH(FW_PATH),
+        .COUNTER_WIDTH(COUNTER_WIDTH)
     ) 
     RISC_V_CPU
     (   
@@ -49,7 +51,7 @@ module cpu_tb();
     end
 
     initial begin
-        $dumpfile ("result_vcd/LOAD_STORE.vcd");
+        $dumpfile ("result_vcd/BRANCHES.vcd");
         $dumpvars();
     end
     

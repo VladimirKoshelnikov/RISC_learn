@@ -1,7 +1,8 @@
 module alu #(
     parameter DATA_WIDTH = 32,
     parameter RAM_WIDTH = 31,
-    parameter FW_LENGTH = 8
+    parameter FW_LENGTH = 8,
+    parameter COUNTER_WIDTH = 12
 ) (
     input bit [2:0] func3,
     input bit [6:0] func7,
@@ -19,8 +20,8 @@ module alu #(
     output bit                      ram_we,
     output bit [RAM_WIDTH-1:0]      ram_address,
 
-    input bit [DATA_WIDTH - 1:0]    pc_current_address,
-    output bit [DATA_WIDTH - 1:0]   pc_next_address
+    input bit [COUNTER_WIDTH - 1:0]    pc_current_address,
+    output bit [COUNTER_WIDTH - 1:0]   pc_next_address
 
 );
     localparam FW_VOLUME = FW_LENGTH << 2;

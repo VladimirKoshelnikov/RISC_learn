@@ -1,14 +1,14 @@
 module cpu #(   parameter CPU_WIDTH = 32, 
                 parameter RAM_WIDTH = 31,
                 parameter FW_LENGTH = 8,
-                parameter FW_PATH   = "src/firmware/program.hex") (   
+                parameter FW_PATH   = "src/firmware/program.hex",
+                parameter COUNTER_WIDTH = 12) (   
     input bit clk, 
     input bit a_reset_n);
     
     localparam CMD_WIDTH        = 32'h4;
     localparam START_ADDRESS    = 32'h0;
 
-    localparam COUNTER_WIDTH    = CPU_WIDTH;
     localparam DATA_WIDTH       = CPU_WIDTH;
     localparam INSTRUCTON_WIDTH = CPU_WIDTH;
 
@@ -61,7 +61,9 @@ module cpu #(   parameter CPU_WIDTH = 32,
 
     rom #(
         .FW_LENGTH(FW_LENGTH),
-        .FW_PATH(FW_PATH)
+        .FW_PATH(FW_PATH),
+        .COUNTER_WIDTH(COUNTER_WIDTH),
+        .INSTRUCTON_WIDTH(INSTRUCTON_WIDTH)
         ) rom(
         .cmd_address_current(cmd_address_current),
         .current_instruction(current_instruction));
@@ -128,7 +130,8 @@ module cpu #(   parameter CPU_WIDTH = 32,
     alu #(
         .RAM_WIDTH(RAM_WIDTH),
         .DATA_WIDTH(DATA_WIDTH),
-        .FW_LENGTH(FW_LENGTH)
+        .FW_LENGTH(FW_LENGTH),
+        .COUNTER_WIDTH(COUNTER_WIDTH)
         ) alu (
         .clk(clk),
 
